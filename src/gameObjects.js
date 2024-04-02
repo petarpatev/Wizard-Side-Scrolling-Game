@@ -15,11 +15,7 @@ function initElements() {
             wizardElement.style.top = wizardState.posY + 'px';
             wizardElement.style.left = wizardState.posX + 'px';
 
-            this.wizardElement = wizardElement;
-
             elements.gameScreen.appendChild(wizardElement);
-
-            return wizardElement;
         }
     }
 }
