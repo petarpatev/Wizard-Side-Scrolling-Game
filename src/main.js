@@ -23,7 +23,5 @@ function onGameStart() {
 
     //start game
     start(state, elements);
-
-    //create wizard
-    const wizard = elements.createWizard();
+    
 }

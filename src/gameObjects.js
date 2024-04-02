@@ -5,17 +5,21 @@ function initElements() {
     return {
         startScreen,
         gameScreen,
-        createWizard() {
+        createWizard(wizardState) {
             const wizardElement = document.createElement('div');
             wizardElement.classList.add('wizard');
 
-            wizardElement.style.width = state.player.width + 'px';
-            wizardElement.style.height = state.player.height + 'px';
+            wizardElement.style.width = wizardState.width + 'px';
+            wizardElement.style.height = wizardState.height + 'px';
 
-            wizardElement.style.top = state.player.posY + 'px';
-            wizardElement.style.left = state.player.posX + 'px';
+            wizardElement.style.top = wizardState.posY + 'px';
+            wizardElement.style.left = wizardState.posX + 'px';
+
+            this.wizardElement = wizardElement;
 
             elements.gameScreen.appendChild(wizardElement);
+
+            return wizardElement;
         }
     }
 }

@@ -9,9 +9,18 @@
  }
 
  .container {
-     position: relative;
-     width: 100vw;
+    position: relative;
+     width: 100%;
      height: 100vh;
+     background: rgb(61, 160, 244);
+     background: linear-gradient(0deg, rgba(61, 160, 244, 1) 0%, rgba(192, 221, 246, 1) 33%, rgba(55, 157, 244, 1) 100%)
+ }
+
+ .game-area {
+     margin: 0;
+     position: relative;
+     width: 100%;
+     height: 96vh;
      background: rgb(61, 160, 244);
      background: linear-gradient(0deg, rgba(61, 160, 244, 1) 0%, rgba(192, 221, 246, 1) 33%, rgba(55, 157, 244, 1) 100%)
  }
@@ -28,12 +37,6 @@
      cursor: pointer;
  }
 
- /* .game-area {
-     width: 100%;
-     height: 100vh;
-     background-color: red;
- } */
-
  .game-score {
      background-color: black;
      color: white;
@@ -41,7 +44,7 @@
  }
 
  .wizard {
-    position: absolute;
-    background-image: url('images/wizard.png');
-    background-size: cover;
+     position: absolute;
+     background-image: url('images/wizard.png');
+     background-size: cover;
  }

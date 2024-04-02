@@ -8,6 +8,9 @@ function initState() {
         },
         keys: {
             
+        },
+        game: {
+            speed: 2,
         }
     };
 
