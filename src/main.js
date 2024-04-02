@@ -8,5 +8,8 @@ function onGameStart() {
     elements.gameScreen.classList.remove('hide');
 
     //start game
-    window.requestAnimationFrame(gameAction);
+    start(state, elements);
+
+    //create wizard
+    const wizard = elements.createWizard();
 }

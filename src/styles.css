@@ -28,14 +28,20 @@
      cursor: pointer;
  }
 
- .game-area {
+ /* .game-area {
      width: 100%;
      height: 100vh;
      background-color: red;
- }
+ } */
 
  .game-score {
      background-color: black;
      color: white;
      text-align: center;
+ }
+
+ .wizard {
+    position: absolute;
+    background-image: url('images/wizard.png');
+    background-size: cover;
  }
