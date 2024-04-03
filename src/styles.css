@@ -2,6 +2,7 @@
      font-size: 24px;
      font-family: consolas;
      margin: 0;
+     overflow: hidden;
  }
 
  .hide {
@@ -9,7 +10,7 @@
  }
 
  .container {
-    position: relative;
+     position: relative;
      width: 100%;
      height: 100vh;
      background: rgb(61, 160, 244);
@@ -46,5 +47,19 @@
  .wizard {
      position: absolute;
      background-image: url('images/wizard.png');
+     background-size: cover;
+ }
+
+ .wizard-fire {
+     position: absolute;
+     background-image: url('images/wizard-fire.png');
+     background-size: cover;
+ }
+
+ .fireball {
+     position: absolute;
+     width: 40px;
+     height: 40px;
+     background-image: url('images/fire-ball.png');
      background-size: cover;
  }

@@ -3,7 +3,20 @@ function start(state, elements) {
     window.requestAnimationFrame(gameAction.bind(null, state, elements));
 }
 
-function gameAction(state, elements) {
+function gameAction(state, elements, timestamp) {
+
+    wizardMovement(state, elements, timestamp);
+    fireballMovement(state, elements);
+
+
+    //score logic
+    state.game.score++;
+    elements.scoreScreen.textContent = `${state.game.score} pts`;
+
+    window.requestAnimationFrame(gameAction.bind(null, state, elements));
+}
+
+function wizardMovement(state, elements, timestamp) {
 
     const wizardElement = document.querySelector('.wizard');
 
@@ -11,6 +24,15 @@ function gameAction(state, elements) {
     let isInAir = (state.player.posY + state.player.height) < elements.gameScreen.offsetHeight;
     if (isInAir) {
         state.player.posY += state.game.speed;
+    }
+
+    //fireballs
+    if (state.keys.Space && timestamp - state.player.lastSpawnFireball > state.game.fireballSpawnInterval) {
+        wizardElement.classList.add('wizard-fire');
+        fireballCreation(state, elements);
+        state.player.lastSpawnFireball = timestamp;
+    } else {
+        wizardElement.classList.remove('wizard-fire');
     }
 
     //movement logic
@@ -33,10 +55,29 @@ function gameAction(state, elements) {
     //apply new coordinates to wizard element
     wizardElement.style.top = state.player.posY + 'px';
     wizardElement.style.left = state.player.posX + 'px';
+}
 
-    //score logic
-    state.game.score++;
-    elements.scoreScreen.textContent = `${state.game.score} pts`;
+function fireballCreation(state, elements) {
+    const fireballElement = document.createElement('div');
+    fireballElement.classList.add('fireball');
 
-    window.requestAnimationFrame(gameAction.bind(null, state, elements));
+    fireballElement.posX = state.player.posX + state.player.width;
+
+    fireballElement.style.top = state.player.posY + state.player.height / 3 + 'px';
+    fireballElement.style.left = fireballElement.posX + 'px';
+
+    elements.gameScreen.appendChild(fireballElement);
+}
+
+function fireballMovement(state, elements) {
+    let fireballs = document.querySelectorAll('.fireball');
+    fireballs.forEach(fireball => {
+        if (fireball.posX + fireball.offsetWidth <= elements.gameScreen.offsetWidth) {
+            fireball.posX += state.game.speed * state.game.fireballSpeedMultiplier;
+            fireball.style.left = fireball.posX + 'px';
+        } else {
+            fireball.remove();
+        }
+    })
+
 }

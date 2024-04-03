@@ -1,6 +1,6 @@
 let elements = initElements();
 let state = initState();
-let controllers = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
+let controllers = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Space'];
 
 elements.startScreen.addEventListener('click', onGameStart);
 
