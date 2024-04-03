@@ -13,6 +13,7 @@ function gameAction(state, elements) {
         state.player.posY += state.game.speed;
     }
 
+    //movement logic
     if (state.keys.ArrowUp) {
         state.player.posY = Math.max(state.player.posY - state.game.speed * state.game.speedMultiplier, 0);
     }
@@ -29,8 +30,13 @@ function gameAction(state, elements) {
         state.player.posX = Math.min(state.player.posX + state.game.speed * state.game.speedMultiplier, elements.gameScreen.offsetWidth - state.player.width);
     }
 
+    //apply new coordinates to wizard element
     wizardElement.style.top = state.player.posY + 'px';
     wizardElement.style.left = state.player.posX + 'px';
+
+    //score logic
+    state.game.score++;
+    elements.scoreScreen.textContent = `${state.game.score} pts`;
 
     window.requestAnimationFrame(gameAction.bind(null, state, elements));
 }

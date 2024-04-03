@@ -7,11 +7,12 @@ function initState() {
             posY: 200
         },
         keys: {
-            
+
         },
         game: {
             speed: 2,
             speedMultiplier: 5,
+            score: 0
         }
     };
 
