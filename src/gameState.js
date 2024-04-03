@@ -11,6 +11,7 @@ function initState() {
         },
         game: {
             speed: 2,
+            speedMultiplier: 5,
         }
     };
 
