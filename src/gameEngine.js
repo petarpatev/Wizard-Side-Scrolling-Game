@@ -9,7 +9,7 @@ function gameAction(state, elements, timestamp) {
     cloudMovement(state);
 
     bugsCreation(state, elements, timestamp);
-    bugsMovement(state);
+    bugsMovement(state, elements);
 
     wizardMovement(state, elements, timestamp);
 
@@ -20,7 +20,19 @@ function gameAction(state, elements, timestamp) {
     state.game.score++;
     elements.scoreScreen.textContent = `${state.game.score} pts`;
 
+
     window.requestAnimationFrame(gameAction.bind(null, state, elements));
+}
+
+function isCollision(firstObj, secondObj) {
+    let firstRect = firstObj.getBoundingClientRect();
+    let secondRect = secondObj.getBoundingClientRect();
+    return !(
+        firstRect.top > secondRect.bottom ||
+        firstRect.bottom < secondRect.top ||
+        firstRect.right < secondRect.left ||
+        firstRect.left > secondRect.right
+    )
 }
 
 function wizardMovement(state, elements, timestamp) {
@@ -79,11 +91,14 @@ function bugsCreation(state, elements, timestamp) {
     }
 }
 
-function bugsMovement(state) {
+function bugsMovement(state, elements) {
     let bugs = document.querySelectorAll('.bug');
     bugs.forEach(bug => {
         bug.posX -= state.game.speed * state.game.bugSpeedMultiplier;
         bug.style.left = bug.posX + 'px';
+        if (isCollision(bug, elements.wizardElement)) {
+            console.log('Game Over');
+        }
         if (bug.posX <= 0) {
             bug.remove();
         }
@@ -130,7 +145,15 @@ function fireballCreation(state, elements) {
 
 function fireballMovement(state, elements) {
     let fireballs = document.querySelectorAll('.fireball');
+    let bugs = document.querySelectorAll('.bug');
     fireballs.forEach(fireball => {
+        bugs.forEach(bug => {
+            if (isCollision(bug, fireball)) {
+                state.game.score += state.game.bugKillBonus;
+                bug.remove();
+                fireball.remove();
+            }
+        })
         if (fireball.posX + fireball.offsetWidth <= elements.gameScreen.offsetWidth) {
             fireball.posX += state.game.speed * state.game.fireballSpeedMultiplier;
             fireball.style.left = fireball.posX + 'px';

@@ -44,6 +44,17 @@
      text-align: center;
  }
 
+ .game-over {
+     position: absolute;
+     width: 50%;
+     background-color: red;
+     top: 100px;
+     left: 25%;
+     z-index: 1;
+     text-align: center;
+     padding: 30px;
+ }
+
  .wizard {
      z-index: 1;
      position: absolute;
@@ -77,10 +88,10 @@
  }
 
  .bug {
-    z-index: 1;
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    background-image: url('images/bug.png');
-    background-size: cover;
+     z-index: 1;
+     position: absolute;
+     width: 40px;
+     height: 40px;
+     background-image: url('images/bug.png');
+     background-size: cover;
  }
