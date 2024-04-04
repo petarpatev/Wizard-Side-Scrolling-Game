@@ -53,10 +53,11 @@
      z-index: 1;
      text-align: center;
      padding: 30px;
+     border-radius: 30px;
  }
 
  .wizard {
-     z-index: 1;
+     z-index: 2;
      position: absolute;
      background-image: url('images/wizard.png');
      background-size: cover;

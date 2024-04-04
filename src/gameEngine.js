@@ -5,14 +5,18 @@ function start(state, elements) {
 
 function gameAction(state, elements, timestamp) {
 
+    //clouds
     cloudCreation(state, elements, timestamp);
     cloudMovement(state);
 
+    //bugs
     bugsCreation(state, elements, timestamp);
     bugsMovement(state, elements);
 
+    //wizard
     wizardMovement(state, elements, timestamp);
 
+    //fireballs
     fireballMovement(state, elements);
 
 
@@ -21,7 +25,14 @@ function gameAction(state, elements, timestamp) {
     elements.scoreScreen.textContent = `${state.game.score} pts`;
 
 
-    window.requestAnimationFrame(gameAction.bind(null, state, elements));
+    if (state.game.isActiveGame) {
+        window.requestAnimationFrame(gameAction.bind(null, state, elements));
+    }
+}
+
+function gameOverAction() {
+    elements.gameOverScreen.classList.remove('hide');
+    state.game.isActiveGame = false;
 }
 
 function isCollision(firstObj, secondObj) {
@@ -97,7 +108,7 @@ function bugsMovement(state, elements) {
         bug.posX -= state.game.speed * state.game.bugSpeedMultiplier;
         bug.style.left = bug.posX + 'px';
         if (isCollision(bug, elements.wizardElement)) {
-            console.log('Game Over');
+            gameOverAction();
         }
         if (bug.posX <= 0) {
             bug.remove();

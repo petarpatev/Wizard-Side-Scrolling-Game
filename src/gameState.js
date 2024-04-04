@@ -15,6 +15,7 @@ function initState() {
             Space: false
         },
         game: {
+            isActiveGame: true,
             bugKillBonus: 500,
             speed: 2,
             fireballSpeedMultiplier: 4,
