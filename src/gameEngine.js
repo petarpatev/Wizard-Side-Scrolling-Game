@@ -7,6 +7,8 @@ function gameAction(state, elements, timestamp) {
 
     wizardMovement(state, elements, timestamp);
     fireballMovement(state, elements);
+    cloudCreation(state, elements, timestamp);
+    cloudMovement(state, elements, timestamp);
 
 
     //score logic
@@ -35,7 +37,7 @@ function wizardMovement(state, elements, timestamp) {
         wizardElement.classList.remove('wizard-fire');
     }
 
-    //movement logic
+    //wizard movement logic
     if (state.keys.ArrowUp) {
         state.player.posY = Math.max(state.player.posY - state.game.speed * state.game.speedMultiplier, 0);
     }
@@ -55,6 +57,32 @@ function wizardMovement(state, elements, timestamp) {
     //apply new coordinates to wizard element
     wizardElement.style.top = state.player.posY + 'px';
     wizardElement.style.left = state.player.posX + 'px';
+}
+
+function cloudCreation(state, elements, timestamp) {
+    if (timestamp - state.game.lastSpawnCloud > state.game.cloudSpawnInterval + 20000 * Math.random()) {
+        const cloudElement = document.createElement('div');
+        cloudElement.classList.add('cloud');
+
+        cloudElement.posX = elements.gameScreen.offsetWidth - 200;
+        cloudElement.style.left = cloudElement.posX + 'px';
+        cloudElement.style.top = (elements.gameScreen.offsetHeight - 200) * Math.random() + 'px';
+
+        elements.gameScreen.appendChild(cloudElement);
+
+        state.game.lastSpawnCloud = timestamp;
+    }
+}
+
+function cloudMovement(state, elements, timestamp) {
+    let clouds = document.querySelectorAll('.cloud');
+    clouds.forEach(cloud => {
+        cloud.posX -= state.game.speed;
+        cloud.style.left = cloud.posX + 'px';
+        if (cloud.posX <= 0) {
+            cloud.remove();
+        }
+    })
 }
 
 function fireballCreation(state, elements) {

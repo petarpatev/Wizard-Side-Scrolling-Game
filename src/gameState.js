@@ -20,6 +20,8 @@ function initState() {
             speedMultiplier: 5,
             score: 0,
             fireballSpawnInterval: 1000,
+            cloudSpawnInterval: 2000,
+            lastSpawnCloud: 0
         }
     };
 
