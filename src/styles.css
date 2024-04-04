@@ -61,8 +61,8 @@
  .fireball {
      z-index: 1;
      position: absolute;
-     width: 40px;
-     height: 40px;
+     width: 30px;
+     height: 30px;
      background-image: url('images/fire-ball.png');
      background-size: cover;
  }
@@ -74,4 +74,13 @@
      height: 200px;
      background-image: url('images/cloud.png');
      background-size: cover;
+ }
+
+ .bug {
+    z-index: 1;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-image: url('images/bug.png');
+    background-size: cover;
  }

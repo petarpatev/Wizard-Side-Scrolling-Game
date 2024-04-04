@@ -5,10 +5,15 @@ function start(state, elements) {
 
 function gameAction(state, elements, timestamp) {
 
-    wizardMovement(state, elements, timestamp);
-    fireballMovement(state, elements);
     cloudCreation(state, elements, timestamp);
-    cloudMovement(state, elements, timestamp);
+    cloudMovement(state);
+
+    bugsCreation(state, elements, timestamp);
+    bugsMovement(state);
+
+    wizardMovement(state, elements, timestamp);
+
+    fireballMovement(state, elements);
 
 
     //score logic
@@ -28,7 +33,7 @@ function wizardMovement(state, elements, timestamp) {
         state.player.posY += state.game.speed;
     }
 
-    //fireballs
+    //fireball creation
     if (state.keys.Space && timestamp - state.player.lastSpawnFireball > state.game.fireballSpawnInterval) {
         wizardElement.classList.add('wizard-fire');
         fireballCreation(state, elements);
@@ -59,6 +64,32 @@ function wizardMovement(state, elements, timestamp) {
     wizardElement.style.left = state.player.posX + 'px';
 }
 
+function bugsCreation(state, elements, timestamp) {
+    if (timestamp - state.game.lastSpawnBug > state.game.bugSpawnInterval + 10000 * Math.random()) {
+        const bugElement = document.createElement('div');
+        bugElement.classList.add('bug');
+
+        bugElement.posX = elements.gameScreen.offsetWidth - 30;
+        bugElement.style.left = bugElement.posX + 'px';
+        bugElement.style.top = (elements.gameScreen.offsetHeight - 30) * Math.random() + 'px';
+
+        elements.gameScreen.appendChild(bugElement);
+
+        state.game.lastSpawnBug = timestamp;
+    }
+}
+
+function bugsMovement(state) {
+    let bugs = document.querySelectorAll('.bug');
+    bugs.forEach(bug => {
+        bug.posX -= state.game.speed * state.game.bugSpeedMultiplier;
+        bug.style.left = bug.posX + 'px';
+        if (bug.posX <= 0) {
+            bug.remove();
+        }
+    })
+}
+
 function cloudCreation(state, elements, timestamp) {
     if (timestamp - state.game.lastSpawnCloud > state.game.cloudSpawnInterval + 20000 * Math.random()) {
         const cloudElement = document.createElement('div');
@@ -74,7 +105,7 @@ function cloudCreation(state, elements, timestamp) {
     }
 }
 
-function cloudMovement(state, elements, timestamp) {
+function cloudMovement(state) {
     let clouds = document.querySelectorAll('.cloud');
     clouds.forEach(cloud => {
         cloud.posX -= state.game.speed;

@@ -18,10 +18,13 @@ function initState() {
             speed: 2,
             fireballSpeedMultiplier: 4,
             speedMultiplier: 5,
+            bugSpeedMultiplier: 4,
             score: 0,
             fireballSpawnInterval: 1000,
             cloudSpawnInterval: 2000,
-            lastSpawnCloud: 0
+            bugSpawnInterval: 1500,
+            lastSpawnCloud: 0,
+            lastSpawnBug: 0
         }
     };
 
